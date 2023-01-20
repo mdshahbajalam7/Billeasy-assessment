@@ -21,7 +21,6 @@ department.post("/create", (req, res) => {
       if (error) {
         throw error;
       }
-      console.log(results);
       res
         .status(201)
         .send({ message: "Department created", 'Department': results.rows[0]});

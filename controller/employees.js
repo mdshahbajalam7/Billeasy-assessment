@@ -28,7 +28,7 @@ employee.post("/search", (req, res) => {
     if (error) {
       throw error;
     }
-    res.status(200).send({message:"gedding employee list", data:results.rows});
+    res.status(200).send({message:"getting employee list", data:results.rows, totalCount:results.rows.length});
   });
 });
 
