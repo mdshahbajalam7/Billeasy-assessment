@@ -8,6 +8,10 @@ require("dotenv").config();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.get("/",(req,res)=>{
+  res.send("App started sucessfully")
+})
+
 //Employee middleware for employee routes
 app.use("/employee",employee) 
 
