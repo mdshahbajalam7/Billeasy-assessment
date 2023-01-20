@@ -2,6 +2,22 @@ const express = require("express");
 const database = require("../database");
 const employee = express();
 
+//Get employees by filter
+employee.get("/", (req, res) => {
+
+  let getQuery = `SELECT e.id, e.name, e.email, e.mobile, e.gender, d.name as department, e.created_at, e.updated_at
+  FROM employee e 
+  LEFT JOIN department d ON e.department_id=d.id
+  ORDER BY e.name ASC`;
+
+  database.query(getQuery, (error, results) => {
+    if (error) {
+      throw error;
+    }
+    res.status(200).send({message:"getting employee list", data:results.rows, totalCount:results.rows.length});
+  });
+});
+
 
 //Get employees by filter
 employee.post("/search", (req, res) => {
