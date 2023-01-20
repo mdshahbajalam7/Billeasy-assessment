@@ -18,7 +18,7 @@ employee.post("/search", (req, res) => {
     whereClouse = whereClouse + `AND d.name = '${department}'`;
   }
 
-  let getQuery = `SELECT e.name, e.email, e.mobile, e.gender, d.name as department
+  let getQuery = `SELECT e.id, e.name, e.email, e.mobile, e.gender, d.name as department, e.created_at, e.updated_at
   FROM employee e 
   LEFT JOIN department d ON e.department_id=d.id
   ${whereClouse}
@@ -28,7 +28,7 @@ employee.post("/search", (req, res) => {
     if (error) {
       throw error;
     }
-    res.status(200).json(results.rows);
+    res.status(200).send({message:"gedding employee list", data:results.rows});
   });
 });
 
@@ -73,7 +73,7 @@ employee.post("/create", (req, res) => {
         throw error;
       }
       recordCount+=1
-      res.status(201).send({message:"Employees created","Employee": results.rows[0],recordCount})
+      res.status(201).send({message:"Employees created","data": results.rows[0],recordCount})
     }
   );
 });
