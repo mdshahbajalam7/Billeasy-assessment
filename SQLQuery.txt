@@ -1,0 +1,52 @@
+//Creating Table for department
+-- CREATE TABLE department(
+-- 	ID SERIAL PRIMARY KEY,
+--   	name VARCHAR(30),
+-- 	created_at DATE,
+-- 	updated_at DATE
+-- );
+
+//Create table of employee
+-- CREATE TABLE employee(
+-- 	ID SERIAL PRIMARY KEY,
+--   	name VARCHAR(30),
+--   	email VARCHAR(30),
+-- 	gender VARCHAR(100),
+-- 	mobile VARCHAR(10),
+-- 	department_id BIGINT, 
+-- 	FOREIGN KEY (department_id) REFERENCES department(id),
+-- 	created_at DATE,
+-- 	updated_at DATE
+-- );
+
+//Inserting data to department table
+-- INSERT INTO department(name,created_at,updated_at) VALUES
+-- ('frontend','2023-01-19T18:30:00.000Z','2023-01-19T18:30:00.000Z'),
+-- ('backend','2023-01-19T18:30:00.000Z','2023-01-19T18:30:00.000Z'),
+-- ('full-stack','2023-01-19T18:30:00.000Z','2023-01-19T18:30:00.000Z'),
+-- ('financial','2023-01-19T18:30:00.000Z','2023-01-19T18:30:00.000Z'),
+-- ('marketing','2023-01-19T18:30:00.000Z','2023-01-19T18:30:00.000Z');
+
+//getting all data
+SELECT * FROM department;
+
+
+////Inserting data to employee table
+-- INSERT INTO employee(name, email,gender, mobile,department_id, created_at, updated_at) VALUES
+-- ('john doe','john@email.com', 'male','123456789',1,'2023-01-19T18:30:00.000Z','2023-01-19T18:30:00.000Z'),
+-- ('jerry hell','jerry@email.com', 'female','123456789',1,'2023-01-19T18:30:00.000Z','2023-01-19T18:30:00.000Z'),
+-- ('brack worth','brack@email.com', 'male','123456789',1,'2023-01-19T18:30:00.000Z','2023-01-19T18:30:00.000Z'),
+-- ('dolly joe','dolly@email.com', 'female','123456789',2,'2023-01-19T18:30:00.000Z','2023-01-19T18:30:00.000Z'),
+-- ('hilmon fell','hilmon@email.com', 'male','123456789',3,'2023-01-19T18:30:00.000Z','2023-01-19T18:30:00.000Z');
+
+//getting all data of employee
+-- SELECT * FROM employee;
+
+//Getting employee and their department filter by department and date range
+SELECT e.name, e.email, e.mobile, e.gender, d.name as department
+  FROM employees e 
+  LEFT JOIN department d ON e.department_id=d.id
+  WHERE e.created_at between '2023-01-19T18:30:00.000Z' AND '2023-01-19T18:30:00.000Z'
+  AND d.name = 'full-stack'
+  ORDER BY e.name ASC
+  
